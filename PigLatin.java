@@ -4,42 +4,36 @@ public class PigLatin
     public static void String(String[] args){
       Scanner Sc = new Scanner(System.in);  
       String Word = Sc.nextLine();
-      int B = 0;
-      int E = 0;
-      int Tot = 0;
+      Word.trim();
+      int y = 0;
       String Total = "";
-      boolean Open = false;
+      boolean Short = false;
       for(int i = 0; i < Word.length(); i++){
-         if(Tot == 0 && Word.indexOf(" ",Tot) > 0){
-             Total += Converter(Word,0,Word.indexOf(" ",Tot));
-            }
-    else{
-         if(Word.indexOf(" ",Tot) > 0){
-          B = Word.indexOf(" ",Tot);
-          Open = true;
-        }
-        if(Word.indexOf(" ",B+1) > 0){
-        E = Word.indexOf(" ",B+1);
-        Open = false;
-        }
+          Short = false;
+ int x = Word.indexOf(" ",y);
+ y = 0;
+ if(i == 0)x = 0;
+ if(x == -1)i = Word.length();
+ 
+ if(x >= 0){
+     
+    y = Word.indexOf(" ",x+1);
+  if(i != 0)x += 1;
+    System.out.println(x);
+    if(y <= 0)y = Word.length();
+    if(Math.abs(x-y) <= 2){
+        Short = true;
     }
-        if(B >0 && E > 0){
-            Total += Converter(Word,B,E);
-            Tot = E+1;
-            B = 0;
-            E = 0;
-             
-        }
+    }
+  
     
-        else if(Open == true && B > 0 && E < 0){
-         Total += Converter(Word,Tot,Word.length());
-        }
-        else{
-            i = Word.length();
-            Total += Converter(Word,0,Word.length());
-        }
+    if(Short == false && x >= 0 && y >= 0)Total += Converter(Word,x,y);
+    else if (x >= 0 && y >= 0)Total += Word.substring(x,y) + " ";
+    else i = Word.length();
+    x = 0;
+
     }
-       //System.out.println(Total);
+       System.out.println(Total);
     }
     
     public static String Converter(String Word,int B, int E){
